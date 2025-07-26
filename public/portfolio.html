@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pranjal Mahajan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="left">Pranjal <span class="redtextnav">Mahajan</span></div>
+        <div class="right">
+          <ul>
+            <li><a href="#Home" data-target="Home">Home</a></li>
+            <li><a href="#About">About Me</a></li>
+            <li><a href="#Skills">Skills</a></li>
+            <li><a href="#Contactme">Contact Me</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <canvas
+        id="gesture-canvas"
+        style="
+          position: fixed;
+          top: 5.5rem;
+          left: 1rem;
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          overflow: hidden;
+          z-index: 9999;
+        "
+      >
+      </canvas>
+      <div id="custom-pointer"></div>
+
+      <section id="Home" class="firstsection" >
+        <div class="container">
+          <div class="firstpage" data-aos="fade-in">
+            Hello, I'm <span class="purple">Pranjal</span>
+            <div data-aos="fade-in">A Passionate</div>
+            <span id="element" data-aos="fade-in"></span>
+          </div>
+          <div data-aos="fade-in">
+            I'm interested in making beautiful & responsive web applications while constantly learning & exploring new Technologies
+          </div>
+        </div>
+
+        <div class="social-icons">
+          <a
+            href="https://www.linkedin.com/in/pranjal-mahajan8"
+            target="_blank"
+            class="social-btn"
+          >
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            class="social-btn"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://drive.google.com/file/d/1_4yBgTUjhOV0TRbT6YlaKlC5hCIXTVFk/view?usp=sharing"
+            target="_blank"
+            class="social-btn"
+          >
+            <i class="fas fa-clipboard-list"></i>
+          </a>
+        </div>
+      </section>
+      <section id="About" class="secondsection">
+        <div class="container">
+          <div class="heading" data-aos="fade-up">
+            <h1>About <span class="redtext">Me</span></h1>
+          </div>
+
+          <div class="about-container">
+            <div class="leftsection" data-aos="fade-up">
+              <h3 style="margin-bottom: 2rem;">Hi,  I'm <span class="redtext">Pranjal</span>. I develop websites and I love what I do.</h3>
+              <p>
+              I’ve been working on web development more than half a year now. I have developed multiple projects utilizing Javascript, Html & Css for frontend development. I love the world of computers and spend my free time immersed in the whole ecosystem of computers and technology. I am an inquisitive person with a thirst for knowledge and always ready to adapt and learn new things.
+              </p>
+            </div>
+            <div class="rightsection" data-aos="fade-up">
+              <img src="Mypic.jpg" alt="My Picture" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="Skills" class="thirdsection">
+        <div class="container">
+          <div class="thirdheading" data-aos="fade-up">
+            <h1><span class="redtext">S</span>kills</h1>
+            <h3>Technologies and Experience</h3>
+          </div>
+
+          <div class="skills-grid" data-aos="fade-up">
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                alt="HTML"
+              />
+              <p>HTML</p>
+            </div>
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                alt="CSS"
+              />
+              <p>CSS</p>
+            </div>
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                alt="JavaScript"
+              />
+              <p>JavaScript</p>
+            </div>
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                alt="React"
+              />
+              <p>React</p>
+            </div>
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                alt="TypeScript"
+              />
+              <p>TypeScript</p>
+            </div>
+            <div class="skill-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                alt="C++"
+              />
+              <p>C++</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fourthsection" id="Contactme">
+        <div class="container" data-aos="fade-up">
+          <div class="fourthheading">
+            <h1>Chat With <span class="redtext">Me</span></h1>
+            <div class="contact-container">
+              <form id="contact-form" method="POST" action="/contact">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Name"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="E-Mail"
+                  required
+                />
+                <input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  placeholder="Subject"
+                  required
+                />
+                <textarea
+                  name="message"
+                  id="message"
+                  placeholder="Message"
+                  rows="6"
+                  required
+                ></textarea>
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="portfolio.js" defer></script>
+    <script src="gesture.js" type="module"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </body>
+</html>
