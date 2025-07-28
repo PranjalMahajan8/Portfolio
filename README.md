@@ -4,7 +4,6 @@ This is a personal portfolio website built using HTML, CSS, JavaScript, and Node
 - A responsive frontend with smooth navigation and AOS animations.
 - Hand gesture control using MediaPipe and custom pointer logic.
 - A contact form that sends and stores messages using a Node.js + Express backend.
-- 
 ## Live Demo
 
 👉 [View Website](https://your-deployed-link.com)
