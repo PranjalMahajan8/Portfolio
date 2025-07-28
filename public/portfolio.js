@@ -27,7 +27,7 @@ document
     const message = document.getElementById("message").value;
 
     try {
-      const res = await fetch("/contact", {
+      const res = await fetch("https://portfolio-backend-ns1i.onrender.com/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

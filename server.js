@@ -1,10 +1,12 @@
-const express = require('express'); //handle roots and middleware
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -41,6 +43,11 @@ app.post('/contact', (req, res) => {
       res.json({ message: "Message saved successfully!" });
     });
   });
+});
+
+// 🔥 Fallback for all GET requests (important!)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Start server
