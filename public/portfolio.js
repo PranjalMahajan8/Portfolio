@@ -1,7 +1,7 @@
 console.log("JS loaded");
 
 var typed = new Typed("#element", {
-  strings: ["Web Developer"],
+  strings: [" Web Developer"],
   once:true,
   typeSpeed: 60,
   loop: false,

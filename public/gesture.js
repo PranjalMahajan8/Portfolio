@@ -7,13 +7,21 @@ let handLandmarker;
 let video;
 let canvas;
 let ctx;
-let scrollVelocity = 0;
 
 let smoothX = window.innerWidth / 2;
 let smoothY = window.innerHeight / 2;
 
+let lastClickTime = 0;
+const clickCooldown = 800; // ms
+
 function lerp(a, b, t) {
   return a + (b - a) * t;
+}
+
+function distance(p1, p2) {
+  const dx = p1.x - p2.x;
+  const dy = p1.y - p2.y;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
 async function initHandTracking() {
@@ -49,7 +57,11 @@ function setupCamera() {
         function drawFrame() {
           canvas.width = 120;
           canvas.height = 120;
+          ctx.save(); // Save current state
+          ctx.translate(canvas.width, 0); // Move to right edge
+          ctx.scale(-1, 1); // Flip horizontally
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          ctx.restore(); // Restore to normal
 
           const nowInMs = Date.now();
           const result = handLandmarker.detectForVideo(video, nowInMs);
@@ -57,23 +69,31 @@ function setupCamera() {
           if (result.landmarks?.length > 0) {
             const landmarks = result.landmarks[0];
             const indexTip = landmarks[8];
+            const thumbTip = landmarks[4];
 
-            // Calculate screen position from normalized coordinates
+            // ---- POINTER MOVEMENT ----
             const targetX = (1 - indexTip.x) * window.innerWidth;
             const targetY = indexTip.y * window.innerHeight;
+            smoothX = lerp(smoothX, targetX, 0.3);
+            smoothY = lerp(smoothY, targetY, 0.3);
 
-            // Smooth movement using lerp
-            smoothX = lerp(smoothX, targetX, 0.2);
-            smoothY = lerp(smoothY, targetY, 0.2);
-
-            // Update pointer position
             const pointer = document.getElementById("custom-pointer");
             if (pointer) {
               pointer.style.left = `${smoothX}px`;
               pointer.style.top = `${smoothY}px`;
             }
-            if (landmarks && landmarks.length > 0) {
-              const indexTip = landmarks[8];
+
+            // ---- CLICK GESTURE (Pinch) ----
+            const pinchDist = distance(indexTip, thumbTip);
+            if (pinchDist < 0.05) {
+              const now = Date.now();
+              if (now - lastClickTime > clickCooldown) {
+                const clickedElem = document.elementFromPoint(smoothX, smoothY);
+                if (clickedElem) clickedElem.click();
+                lastClickTime = now;
+              }
+
+              // ---- SCROLLING WHILE PINCHING ----
               const screenCenter = 0.5;
               const offsetFromCenter = indexTip.y - screenCenter;
               const sensitivity = 50;
@@ -82,11 +102,11 @@ function setupCamera() {
               window.scrollBy(0, scrollVelocity);
             }
 
-            // Optional: draw red dots on canvas
+            // ---- DRAW LANDMARKS ----
             for (const point of landmarks) {
               ctx.beginPath();
               ctx.arc(
-                point.x * canvas.width,
+                (1-point.x) * canvas.width,
                 point.y * canvas.height,
                 4,
                 0,
