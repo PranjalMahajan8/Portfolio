@@ -123,12 +123,12 @@ function drawLoop() {
     // Smooth pointer tracking (already mirrored)
     const targetX = (1 - indexTip.x) * window.innerWidth;
     const targetY = indexTip.y * window.innerHeight;
-    smoothX = lerp(smoothX, targetX, 0.25);
-    smoothY = lerp(smoothY, targetY, 0.25);
+    smoothX = lerp(smoothX, targetX, 0.35);
+    smoothY = lerp(smoothY, targetY, 0.35);
 
     const pointer = document.getElementById("custom-pointer");
     if (pointer) {
-      pointer.style.left = `${smoothX}px`;
+      pointer.style.left = `${smooth3X}px`;
       pointer.style.top = `${smoothY}px`;
     }
 
