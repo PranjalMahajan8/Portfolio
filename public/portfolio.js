@@ -47,3 +47,28 @@ document
       console.error(err);
     }
   });
+  // Smooth scroll for navbar links without interfering with gesture scroll
+// Fix: Only prevent default if triggered by a real mouse event
+document.querySelectorAll("nav a[href^='#']").forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    // Detect if the click is synthetic (gesture-triggered)
+    const isSynthetic = e.pointerType === "" || e.isTrusted === false;
+
+    // Prevent default only for real mouse clicks
+    if (e instanceof MouseEvent && e.isTrusted) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    }
+  });
+});
+
+
