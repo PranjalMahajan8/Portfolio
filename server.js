@@ -1,7 +1,9 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
 const app = express();
 const PORT = 3000;
 
@@ -15,37 +17,43 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // POST route to handle contact form
 app.post('/contact', (req, res) => {
-  const newMessage = req.body;
-  console.log("Received form data:", newMessage);
+  const { name, email, subject, message } = req.body;
+  console.log("Received form data:", req.body);
 
-  const filePath = path.join(__dirname, 'messages.json');
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.MY_EMAIL,         // your Gmail address
+      pass: process.env.MY_EMAIL_PASS,    // your Gmail app password
+    },
+  });
 
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    let messages = [];
+  const mailOptions = {
+    from: email,
+    to: process.env.MY_EMAIL,
+    subject: `Portfolio Message: ${subject}`,
+    text: `
+You received a message from your portfolio contact form:
 
-    if (!err && data) {
-      try {
-        messages = JSON.parse(data);
-      } catch (parseErr) {
-        console.error("Error parsing JSON:", parseErr);
-        return res.status(500).json({ error: "Server error reading messages." });
-      }
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+Message: ${message}
+    `,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("❌ Error sending email:", error);
+      return res.status(500).json({ message: "Failed to send message." });
+    } else {
+      console.log("✅ Email sent:", info.response);
+      return res.json({ message: "Message sent successfully via email!" });
     }
-
-    messages.push(newMessage);
-
-    fs.writeFile(filePath, JSON.stringify(messages, null, 2), err => {
-      if (err) {
-        console.error("Error writing file:", err);
-        return res.status(500).json({ error: "Error saving message." });
-      }
-      console.log("✅ Message saved!");
-      res.json({ message: "Message saved successfully!" });
-    });
   });
 });
 
-// 🔥 Fallback for all GET requests (important!)
+// Fallback route for SPA (frontend)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
