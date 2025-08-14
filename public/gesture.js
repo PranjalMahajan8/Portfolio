@@ -13,7 +13,7 @@ let smoothX = window.innerWidth / 2;
 let smoothY = window.innerHeight / 2;
 
 let lastClickTime = 0;
-const clickCooldown = 800;
+const clickCooldown = 900;
 
 let isScrolling = false;
 let gestureEnabled = true;
