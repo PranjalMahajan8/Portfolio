@@ -12,7 +12,7 @@ This is a personal portfolio website built using HTML, CSS, JavaScript, and Node
 
 - Interactive sections: Home, About, Skills, Contact
 - Gesture control for scrolling and navigation
-- Contact form with data stored in `messages.json` via backend
+- Contact form that sends and email to me instantly using nodemailer
 - Smooth animations and responsive design
 
 ## 🛠️ Tech Stack
@@ -25,5 +25,6 @@ This is a personal portfolio website built using HTML, CSS, JavaScript, and Node
 
 ### Backend
 - Node.js
+- Nodemailer
 - Express.js
 - File system (`fs`) for saving form messages
